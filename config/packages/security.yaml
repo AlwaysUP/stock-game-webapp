@@ -1,0 +1,25 @@
+security:
+    encoders:
+        App\Entity\user:
+            algorithm: bcrypt
+    providers:
+        # in_memory: { memory: ~ }
+        my_provider:
+            entity:
+                class: App\Entity\user
+                property: username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+
+            form_login:
+                login_path: login
+                check_path: login
+                provider: my_provider
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
