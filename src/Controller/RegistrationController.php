@@ -37,13 +37,7 @@ class RegistrationController extends Controller
 
         return $this->render(
             'registration/register.html.twig',
-            array(
-            'form' => $form->createView(),
-            'data_class'      => Task::class,
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'task_item',
-            )
+            array('form' => $form->createView())
         );
     }
 }

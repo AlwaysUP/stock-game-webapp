@@ -20,7 +20,7 @@ class ManageController extends Controller
     public function index(Request $request, AuthorizationCheckerInterface $authChecker, UserPasswordEncoderInterface $passwordEncoder, ObjectManager $objectManager)
     {
         if (false === $authChecker->isGranted('ROLE_USER')) {
-            throw new \Exception('Something went wrong!');
+            return $this->redirectToRoute('login');
         }
 
         $user = new User();
@@ -43,13 +43,7 @@ class ManageController extends Controller
 
         return $this->render(
             'manage/index.html.twig',
-            array(
-            'form' => $form->createView(),
-            'data_class'      => Task::class,
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'task_item',
-            )
+            array('form' => $form->createView())
         );
     }
 }
