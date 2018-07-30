@@ -4,7 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -57,17 +58,22 @@ class User implements UserInterface, \Serializable
      */
     private $username;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $roles;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
     public function getId()
     {
         return $this->id;
     }
     
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
     public function getFullName()
     {
         return $this->fullName;
@@ -76,7 +82,6 @@ class User implements UserInterface, \Serializable
     public function setFullName($fullName)
     {
         $this->fullName = $fullName;
-        return $this;
     }
 
     public function getPassword()
@@ -87,7 +92,16 @@ class User implements UserInterface, \Serializable
     public function setPassword($password)
     {
         $this->password = $password;
-        return $this;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     public function getStreet()
@@ -98,7 +112,6 @@ class User implements UserInterface, \Serializable
     public function setStreet($street)
     {
         $this->street = $street;
-        return $this;
     }
 
     public function getCity()
@@ -109,30 +122,26 @@ class User implements UserInterface, \Serializable
     public function setCity($city)
     {
         $this->city = $city;
-        return $this;
     }
 
-    public function getZipCode()
+    public function getZip()
     {
         return $this->zip;
     }
     
-    public function setZipCode($zip)
+    public function setZip($zip)
     {
         $this->zip = $zip;
-        return $this;
     }
 
     public function getPaypal()
     {
         return $this->paypal;
-        return $this;
     }
     
     public function setPaypal($paypal)
     {
         $this->paypal = $paypal;
-        return $this;
     }
 
     public function getEmail()
@@ -146,10 +155,11 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function setRoles($roles){
+        $this->roles = $roles;
+    }
     public function getRoles(){
-        return [
-            'ROLE_USER'
-        ];
+        return [$this->roles];
     }
     
     public function getSalt(){
@@ -158,7 +168,6 @@ class User implements UserInterface, \Serializable
     
     public function setUsername($username){
         $this->username = $username;
-        return $this;
     }
 
     public function getUsername(){
@@ -175,6 +184,12 @@ class User implements UserInterface, \Serializable
             $this->username,
             $this->email,
             $this->password,
+            $this->roles,
+            $this->fullName,
+            $this->street,
+            $this->city,
+            $this->zip,
+            $this->paypal
         ]);
     }
 
@@ -183,7 +198,21 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->email,
-            $this->password
+            $this->password,
+            $this->roles,
+            $this->fullName,
+            $this->street,
+            $this->city,
+            $this->zip,
+            $this->paypal
         ) = unserialize($string, ['allowed_classes'=>false]);
+    }
+
+    // create User object
+    public function createUser($email, $password, $roles){
+        $this->setEmail($email);
+        $this->setPassword($password);
+        $this->setUsername($email);
+        $this->setRoles($roles);
     }
 }

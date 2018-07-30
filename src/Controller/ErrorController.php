@@ -12,8 +12,6 @@ class ErrorController extends Controller
      */
     public function index()
     {
-        return $this->render('error/index.html.twig', [
-            'controller_name' => 'ErrorController',
-        ]);
+        throw $this->createNotFoundException('Support Group does not exist');
     }
 }

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gamble: Register{% endblock %}
+
+{% block body %}
+<style>
+    h1{
+        margin: 0 auto;
+        padding-top: 20%;
+        width:40%;
+    }
+    form { 
+        margin: 0 auto;
+        width:40%;
+    }
+</style>
+<h1>Sign up</h1>
+<br/>
+<div class="register_form">
+    <form name="user" method="post">
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+        <div>
+            <label for="user_full_name" class="required">Full Name</label><br/>
+            <input id="user_full_name" name="user[full_name]" required="required" type="text"><br/><br/>
+        </div>
+        <div>
+            <label for="user_email" class="required">Email</label><br/>
+            <input id="user_email" name="user[email]" required="required" value="test@sharklasers.com" type="email"><br/><br/>
+        </div>
+        <div>
+            <label for="user_plainPassword_first" class="required">Password</label><br/>
+            <input id="user_plainPassword_first" name="user[plainPassword][first]" required="required" type="password"><br/><br/>
+        </div>
+        <div>
+            <label for="user_plainPassword_second" class="required">Repeat Password</label><br/>
+            <input id="user_plainPassword_second" name="user[plainPassword][second]" required="required" type="password"><br/><br/>
+        </div>
+        <div>
+            <label for="user_street" class="required">Street Address</label><br/>
+            <input id="user_street" name="user[street]" required="required" type="text"><br/><br/>
+        </div>
+        <div>
+            <label for="user_city" class="required">City</label><br/>
+            <input id="user_city" name="user[city]" required="required" type="text"><br/><br/>
+        </div>
+        <div>
+            <label for="user_zip" class="required">Zipcode</label><br/>
+            <input id="user_zip" name="user[zip]" required="required" type="text"><br/><br/>
+        </div>
+        <button type="submit">Register!</button>
+        <input id="user__token" name="user[_token]" value="-irJdejKWhxWWHHcCqJox4SBV498hEGiB6P2a_VxSJg" type="hidden">
+    </form>
+</div>
+
+{% endblock %}

@@ -3,22 +3,43 @@
 {% block title %}Sign in{% endblock %}
 
 {% block body %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    .error { color: red }
+    .content{
+        margin: 0 auto;
+        padding-top: 20%;
+        width:40%;
+    }
+    .register{
+        padding: 2%;
+    }
 </style>
+<div class="content">
+    <h1>Sign in</h1><br/>
+    <form action="{{ path('login') }}" method="post">
+        <label for="username">Username</label><br/>
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+        <input type="text" id="username" name="_username" value="{{ last_username }}" /><br/><br/>
 
-<div class="example-wrapper">
-    <h1>Login</h1>
-    {% if error %}
-        <span class="error">{{ error.messageKey }}</span>
-    {% endif %}
-    <form action="{{ path('login') }}" method="POST"> </form>
-        <input type="text" name"_username" value="{{ last_username }}" placeholder="Username">
-        
-        <input type="password" name"_password" placeholder="Password">
+        <label for="password">Password</label><br/>
+        <input type="password" id="password" name="_password" /><br/><br/>
 
-        <button type="submit">Login</button>
+        {#
+            If you want to control the URL the user
+            is redirected to on success (more details below)
+            <input type="hidden" name="_target_path" value="/account" />
+        #}
+
+        <button type="submit">login</button>
+    </form>
+        <br/>
+    <div class="register">
+        <a href="{{ path('user_registration') }}">Sign up instead</a>
+    </div>
 </div>
 {% endblock %}

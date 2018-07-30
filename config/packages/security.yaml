@@ -1,12 +1,12 @@
 security:
     encoders:
-        App\Entity\user:
+        App\Entity\User: 
             algorithm: bcrypt
     providers:
         # in_memory: { memory: ~ }
         my_provider:
             entity:
-                class: App\Entity\user
+                class: App\Entity\User
                 property: username
 
     firewalls:
@@ -14,12 +14,17 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
-
+            anonymous: ~
             form_login:
                 login_path: login
                 check_path: login
-                provider: my_provider
+                csrf_token_generator: security.csrf.token_manager
+            logout:
+                path:   /logout
+                target: /
     access_control:
+        - { path: ^/login, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/, roles: [ROLE_USER] }
+        # - { path: ^/manage, roles: [ROLE_USER] }
+        # - { path: ^/register, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }

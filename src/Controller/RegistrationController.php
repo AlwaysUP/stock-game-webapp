@@ -1,28 +1,22 @@
 <?php
 
 namespace App\Controller;
+
 use App\Form\UserType;
 use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class ManageController extends Controller
+class RegistrationController extends Controller
 {
     /**
-     * @Route("/manage", name="manage")
+     * @Route("/register", name="user_registration")
      */
-    public function index(Request $request, AuthorizationCheckerInterface $authChecker, UserPasswordEncoderInterface $passwordEncoder, ObjectManager $objectManager)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, ObjectManager $objectManager)
     {
-        if (false === $authChecker->isGranted('ROLE_USER')) {
-            throw new \Exception('Something went wrong!');
-        }
-
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -42,7 +36,7 @@ class ManageController extends Controller
         }
 
         return $this->render(
-            'manage/index.html.twig',
+            'registration/register.html.twig',
             array(
             'form' => $form->createView(),
             'data_class'      => Task::class,

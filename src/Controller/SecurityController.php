@@ -6,7 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use Symfony\Component\OptionsResolver\OptionsResolver;
 class SecurityController extends Controller
 {
     /**
@@ -22,13 +22,13 @@ class SecurityController extends Controller
             'last_username' => $lastUsername
         ]);
     }
-    /**
-     * @Route("/login_check", name="login_check")
-     */
-    public function loginAction()
+    public function configureOptions(OptionsResolver $resolver)
     {
-        // The security layer will intercept this request, else redirect to login page
-        $this->addFlash('warning', $this->get('translator')->trans('login_expired'));
-        return $this->redirect($this->generateUrl('login'));
+        $resolver->setDefaults(array(
+            'data_class'      => Task::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'task_item',
+        ));
     }
 }

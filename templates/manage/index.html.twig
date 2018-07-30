@@ -1,20 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Manage profile{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .container{
+        margin: 0 auto;
+        padding-top: 20%;
+        width:40%;
+    }
 </style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/ManageController.php'|file_link(0) }}">src/Controller/ManageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/manage/index.html.twig'|file_link(0) }}">templates/manage/index.html.twig</a></code></li>
-    </ul>
+<div class="container">
+    <h1>Change profile</h1>
+    <br/>
+    STILL UNDER CONSTRUCTION!!
+    {# <div class="change_form">
+        <form name="user" method="post">
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+            <div>
+                <label for="user_full_name" class="required">Full Name</label><br/>
+                <input id="user_full_name" name="user[full_name]" required="required" type="text"><br/><br/>
+            </div>
+            <div>
+                <label for="user_email" class="required">Email</label><br/>
+                <input id="user_email" name="user[email]" required="required" value="test@sharklasers.com" type="email"><br/><br/>
+            </div>
+            <div>
+                <label for="user_plainPassword_first" class="required">Password</label><br/>
+                <input id="user_plainPassword_first" name="user[plainPassword][first]" required="required" type="password"><br/><br/>
+            </div>
+            <div>
+                <label for="user_plainPassword_second" class="required">Repeat Password</label><br/>
+                <input id="user_plainPassword_second" name="user[plainPassword][second]" required="required" type="password"><br/><br/>
+            </div>
+            <div>
+                <label for="user_street" class="required">Street Address</label><br/>
+                <input id="user_street" name="user[street]" required="required" type="text"><br/><br/>
+            </div>
+            <div>
+                <label for="user_city" class="required">City</label><br/>
+                <input id="user_city" name="user[city]" required="required" type="text"><br/><br/>
+            </div>
+            <div>
+                <label for="user_zip" class="required">Zipcode</label><br/>
+                <input id="user_zip" name="user[zip]" required="required" type="text"><br/><br/>
+            </div>
+            <button type="submit">Register!</button>
+            <input id="user__token" name="user[_token]" value="-irJdejKWhxWWHHcCqJox4SBV498hEGiB6P2a_VxSJg" type="hidden">
+        </form>
+    </div> #}
 </div>
+
+
 {% endblock %}
