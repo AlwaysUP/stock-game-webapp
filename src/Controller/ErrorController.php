@@ -12,6 +12,6 @@ class ErrorController extends Controller
      */
     public function index()
     {
-        throw $this->createNotFoundException('Support Group does not exist');
+        throw $this->createNotFoundException('Sorry fam you in the wrong part of town!');
     }
 }
