@@ -29,17 +29,21 @@
         <label for="password">Password</label><br/>
         <input type="password" id="password" name="_password" /><br/><br/>
 
-        {#
-            If you want to control the URL the user
-            is redirected to on success (more details below)
-            <input type="hidden" name="_target_path" value="/account" />
-        #}
-
         <button type="submit">login</button>
     </form>
-        <br/>
+    {# {{ form_start(form, {'method' : 'POST'}) }}
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+        {{ form_row(form.username) }}
+        {{ form_row(form.password) }}
+        <button type="submit">login</button>
+        {% form_theme form 'form/fields.html.twig' %}
+    {{ form_end(form) }} #}
+    <br/>
     <div class="register">
         <a href="{{ path('user_registration') }}">Sign up instead</a>
     </div>
+
 </div>
 {% endblock %}

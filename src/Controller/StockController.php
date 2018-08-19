@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Form\UserType;
+use App\Form\StockType;
 use App\Entity\User;
+use App\Entity\Stock;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -18,10 +19,10 @@ class StockController extends Controller
      */
     public function add(Request $request, AuthorizationCheckerInterface $authChecker, ObjectManager $objectManager)
     {
-        if (false === $authChecker->isGranted('ROLE_ADMIN')){
+        if (false === $authChecker->isGranted('ROLE_USER')){
             return $this->redirectToRoute('list_stock');
         }
-
+        $stock = new Stock();
         $form = $this->createForm(StockType::class, $stock);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -37,8 +38,9 @@ class StockController extends Controller
         return $this->render(
             'stock/index.html.twig',
             array(
-                "list" => false,
-                'form' => $form->createView()
+                'csrf_protection' => false,
+                'list' => false,
+                'form' => $form->createView(),                
             )
         );
     }
@@ -48,9 +50,13 @@ class StockController extends Controller
      */
     public function list()
     {
-        
+        $stocks =  $this->getDoctrine()
+                        ->getRepository(Stock::class)
+                        ->findAllStocks();
         return $this->render('stock/index.html.twig', [
-            "list" => true
+            'csrf_protection' => false,
+            'list' => true,
+            'stocks' => $stocks,
         ]);
     }
 }
