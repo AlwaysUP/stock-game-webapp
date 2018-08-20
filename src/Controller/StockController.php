@@ -20,7 +20,7 @@ class StockController extends Controller
     public function add(Request $request, AuthorizationCheckerInterface $authChecker, ObjectManager $objectManager)
     {
         if (false === $authChecker->isGranted('ROLE_USER')){
-            return $this->redirectToRoute('list_stock');
+            return $this->redirectToRoute('login');
         }
         $stock = new Stock();
         $form = $this->createForm(StockType::class, $stock);
@@ -50,6 +50,9 @@ class StockController extends Controller
      */
     public function list()
     {
+        if (false === $authChecker->isGranted('ROLE_USER')){
+            return $this->redirectToRoute('login');
+        }
         $stocks =  $this->getDoctrine()
                         ->getRepository(Stock::class)
                         ->findAllStocks();
