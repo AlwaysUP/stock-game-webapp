@@ -13,7 +13,9 @@
         padding: 2%;
     }
 </style>
+<a href="{{ path('logout') }}">LOGOUT</a>
 <div class="content">
+    <h1 style="text-align:center">Your balance is: {{ balance }}</h1>
     {% if bet == false %}
         {% for stock in stocks %}
             <a href="{{ path('gamble-bet', { 'id': stock.id }) }}">
@@ -27,9 +29,13 @@
     {% endif %}
 
     {% if bet == true %}
-        IS Gonna go up-desu<br/>
-        Is gonna go down-desu<br/>
-        Is gonna stay same-desu<br/>
+        {{ form_start(form, {'method' : 'POST'}) }}
+            {{ form_row(form.stakes) }}
+            {{ form_row(form.position) }}
+            {{ form_row(form.timestamp) }}
+            <button type="submit">BET</button>
+        {% form_theme form 'form/fields.html.twig' %}
+        {{ form_end(form) }}
     {% endif %}
 </div>
 

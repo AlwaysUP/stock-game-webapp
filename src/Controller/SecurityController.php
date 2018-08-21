@@ -31,4 +31,14 @@ class SecurityController extends Controller
             'csrf_token_id'   => 'task_item',
         ));
     }
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout(Request $request, AuthenticationUtils $utils)
+    {
+        $error = $utils->getLastAuthenticationError();        
+        return $this->render('security/login.html.twig', [
+            'error' => $error,
+        ]);
+    }
 }

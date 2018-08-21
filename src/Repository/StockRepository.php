@@ -35,12 +35,13 @@ class StockRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findById($value)
+    public function findById($value): ?Stock
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.id = :val')
             ->setParameter('val', $value)
             ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 

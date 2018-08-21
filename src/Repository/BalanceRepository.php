@@ -35,7 +35,6 @@ class BalanceRepository extends ServiceEntityRepository
         ;
     }
     */
-
     /*
     public function findOneBySomeField($value): ?Balance
     {
@@ -47,4 +46,16 @@ class BalanceRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // /*
+    public function findByUserId($value): ?Balance
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.userId = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    // */
 }

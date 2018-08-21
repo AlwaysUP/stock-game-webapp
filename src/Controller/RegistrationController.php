@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Form\UserType;
 use App\Entity\User;
+use App\Entity\Stat;
+use App\Entity\Balance;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +31,19 @@ class RegistrationController extends Controller
             $objectManager->persist($user);
             $objectManager->flush();
 
+            $stat = new Stat();
+            $stat->setUserId($user->getId());
+            $stat->setProfit(0);
+            $stat->setWin(0);
+            $stat->setLoss(0);
+
+            $balance = new Balance();
+            $balance->setUserId($user->getId());
+            $balance->setCurr('USD');
+            $balance->setAmount(50000);
+
+            $objectManager->persist($balance);
+            $objectManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 

@@ -39,7 +39,7 @@ class Transaction
     /**
      * @ORM\Column(type="integer")
      */
-    private $stockId;
+    private $betId;
 
     public function getId()
     {
@@ -86,13 +86,13 @@ class Transaction
         return $this->timestamp;
     }
 
-    public function setStockId($stockId)
+    public function setBetId($betId)
     {
-        $this->stockId = $stockId;
+        $this->betId = $betId;
     }
 
-    public function getStockId()
+    public function getBetId()
     {
-        return $this->stockId;
+        return $this->betId;
     }
 }

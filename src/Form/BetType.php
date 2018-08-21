@@ -7,17 +7,26 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 class BetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('userId')
-            ->add('stakes')
-            ->add('position')
-            ->add('timestamp')
-            ->add('stockId')
-        ;
+        $builder->add('stakes');
+        $builder->add('position', ChoiceType::class, array(
+            'choices' => array(
+                'Is gonna go up-desu' => 'up',
+                'Is gonna go down-desu' => 'down',
+                'Is gonna stay same-desu' => 'same',
+            ),            
+        ));
+        $timestamp = date("Y-m-d h:i:sa");
+        $builder->add('timestamp', HiddenType::class, array(
+            // 'read_only' =>'true',
+            'data' => $timestamp,
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
