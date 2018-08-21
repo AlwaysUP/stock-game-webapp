@@ -33,6 +33,9 @@ class GambleController extends Controller
     public function pick()
     {
         $user = $this->getUser();
+        $balance = $this->getDoctrine()
+                        ->getRepository(Balance::class)
+                        ->findByUserId($user->getId());
         $stocks =  $this->getDoctrine()
                         ->getRepository(Stock::class)
                         ->findAllStocks();
@@ -40,6 +43,7 @@ class GambleController extends Controller
             'bet' => false,
             'stocks' => $stocks,
             'user' => $user,
+            'balance' => $balance,
         ]);
     }
 
