@@ -30,8 +30,11 @@ class GambleController extends Controller
     /**
      * @Route("/gamble/pick", name="gamble-pick")
      */
-    public function pick()
+    public function pick(Request $request,  AuthorizationCheckerInterface $authChecker)
     {
+        if ((false === $authChecker->isGranted('ROLE_USER')) && (false === $authChecker->isGranted('ROLE_ADMIN')) ) {
+            return $this->redirectToRoute('login');
+        }
         $user = $this->getUser();
         $balance = $this->getDoctrine()
                         ->getRepository(Balance::class)
@@ -50,8 +53,11 @@ class GambleController extends Controller
     /**
      * @Route("/gamble/bet", name="gamble-bet")
      */
-    public function bet(Request $request, ObjectManager $objectManager)
+    public function bet(Request $request, ObjectManager $objectManager,  AuthorizationCheckerInterface $authChecker)
     {
+        if ((false === $authChecker->isGranted('ROLE_USER')) && (false === $authChecker->isGranted('ROLE_ADMIN')) ) {
+            return $this->redirectToRoute('login');
+        }
         $stockId = $request->query->get('id');
         $stock =   $this->getDoctrine()
                         ->getRepository(Stock::class)
