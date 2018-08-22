@@ -78,17 +78,28 @@ class GambleController extends Controller
             $objectManager->persist($bet);
             $objectManager->flush();
 
-            $transaction = new Transaction();
-            $transaction->setTimestamp($bet->getTimestamp());
-            $transaction->setUserId($user->getId());
-            $transaction->setCurr('USD');
-            $transaction->setAmount($bet->getStakes());
-            $transaction->setBetId($bet->getId());
+            if ($balance->getAmount() > $bet->getStakes()){
+                $transaction = new Transaction();
+                $transaction->setTimestamp($bet->getTimestamp());
+                $transaction->setUserId($user->getId());
+                $transaction->setCurr('USD');
+                $transaction->setAmount($bet->getStakes());
+                $transaction->setBetId($bet->getId());
 
-            $objectManager->persist($transaction);
-            $objectManager->flush();
+                $objectManager->persist($transaction);
+                $objectManager->flush();
 
+                $balance->setAmount($balance->getAmount() - $bet->getStakes());
+                $objectManager->persist($balance);
+                $objectManager->flush();
+
+            }
+            else{
+                return "IS NOT GOOD!";
+            }
         }
+
+
 
         return $this->render('gamble/index.html.twig', [
             'bet' => true,
