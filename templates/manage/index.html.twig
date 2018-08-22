@@ -19,6 +19,9 @@
     your email {{ email }} <br/>
     you zipcode is {{ zipcode }} <br/>
     your IP is: {{ ipaddr }} <br/>
+
+    <a href="{{ path('add_stock') }}">ADD A STOCK</a><br/>
+    <a href="{{ path('gamble') }}">GAMBLE</a><br/>
         <form name="update_user" method="post">
             <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}"
