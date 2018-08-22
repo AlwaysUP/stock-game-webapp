@@ -19,12 +19,10 @@
     your email {{ email }} <br/>
     you zipcode is {{ zipcode }} <br/>
     your IP is: {{ ipaddr }} <br/>
-
-    {}
         <form name="update_user" method="post">
-            {# <input type="hidden" name="_csrf_token"
+            <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}"
-            > #}
+            >
             <div>
                 <label for="update_user_fullName" class="required">Full Name</label><br/>
                 <input id="update_user_fullName" name="update_user[fullName]" required="" type="text"><br/><br/>

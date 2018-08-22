@@ -46,7 +46,7 @@ class GambleController extends Controller
             'bet' => false,
             'stocks' => $stocks,
             'user' => $user,
-            'balance' => $balance,
+            'balance' => $balance->getAmount(),
         ]);
     }
 
@@ -95,7 +95,7 @@ class GambleController extends Controller
             'user' => $user,
             'stock' => $stock,
             'form' => $form->createView(), 
-            'balance' => $balance,
+            'balance' => $balance->getAmount(),
         ]);
     }
 }
