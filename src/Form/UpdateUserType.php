@@ -16,17 +16,17 @@ class UpdateUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fullName')
+            ->add('fullName', TextType::class)
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
-            ->add('street')
-            ->add('city')
+            ->add('street', TextType::class)
+            ->add('city', TextType::class)
             ->add('zip')
-            ->add('paypal')
-            ->add('email')
+            ->add('paypal', EmailType::class)
+            ->add('email', EmailType::class)
         ;
     }
 

@@ -36,6 +36,8 @@ class RegistrationController extends Controller
             $stat->setProfit(0);
             $stat->setWin(0);
             $stat->setLoss(0);
+            $objectManager->persist($stat);
+            $objectManager->flush();
 
             $balance = new Balance();
             $balance->setUserId($user->getId());

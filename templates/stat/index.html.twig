@@ -1,20 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<a href="{{ path('logout') }}">LOGOUT</a>
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/StatController.php'|file_link(0) }}">src/Controller/StatController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/stat/index.html.twig'|file_link(0) }}">templates/stat/index.html.twig</a></code></li>
-    </ul>
+<a href="{{ path('logout') }}" class="button">LOGOUT</a>
+<div class="content">    
+    {% if indiv == false %}
+    <h1>Stat Leader Board</h1>
+    <a href="{{ path('stat') }}" class = "button">Leader Board</a>&emsp;
+    <a href="{{ path('my-stat') }}" class = "button">Your Stats</a><br/><br/>
+    {% for user in users %}
+        <div class="card">
+            <div class="nohover">
+                {% set full_name = user["user"].fullName | split(' ') %}
+                <b>Name: </b> {{ full_name[0]|upper }}<br/>
+                <b>Wins: </b> {{ user["stat"].win }}<br/>
+                <b>Losses: </b> {{ user["stat"].loss }}<br/>
+            </div>
+        </div>
+        <br/>
+    {% endfor %}
+    {% endif %}
+    {% if indiv == true %}
+    <h1>{{ user.fullName|upper }}</h1>
+    <a href="{{ path('stat') }}" class = "button">Leader Board</a>&emsp;
+    <a href="{{ path('my-stat') }}" class = "button">Your Stats</a><br/><br/>
+        <b>Wins: </b> {{ stat.win }}<br/>
+        <b>Losses: </b> {{ stat.loss }}<br/>
+    {% endif %}
 </div>
 {% endblock %}

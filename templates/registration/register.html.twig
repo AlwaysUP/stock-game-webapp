@@ -3,68 +3,23 @@
 {% block title %}Gamble: Register{% endblock %}
 
 {% block body %}
-<style>
-    h1{
-        margin: 0 auto;
-        padding-top: 20%;
-        width:400px;
-    }
-    form { 
-        margin: 0 auto;
-        width:400px;
-    }
-</style>
-<h1>Sign up</h1>
-<br/>
-<div class="register_form">
-    <form name="user" method="post">
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
-        <div>
-            <label for="user_full_name" class="required">Full Name</label><br/>
-            <input id="user_full_name" name="user[full_name]" required="required" type="text"><br/><br/>
-        </div>
-        <div>
-            <label for="user_email" class="required">Email</label><br/>
-            <input id="user_email" name="user[email]" required="required" type="email"><br/><br/>
-        </div>
-        <div>
-            <label for="user_plainPassword_first" class="required">Password</label><br/>
-            <input id="user_plainPassword_first" name="user[plainPassword][first]" required="required" type="password"><br/><br/>
-        </div>
-        <div>
-            <label for="user_plainPassword_second" class="required">Repeat Password</label><br/>
-            <input id="user_plainPassword_second" name="user[plainPassword][second]" required="required" type="password"><br/><br/>
-        </div>
-        <div>
-            <label for="user_street" class="required">Street Address</label><br/>
-            <input id="user_street" name="user[street]" required="required" type="text"><br/><br/>
-        </div>
-        <div>
-            <label for="user_city" class="required">City</label><br/>
-            <input id="user_city" name="user[city]" required="required" type="text"><br/><br/>
-        </div>
-        <div>
-            <label for="user_zip" class="required">Zipcode</label><br/>
-            <input id="user_zip" name="user[zip]" required="required" type="text"><br/><br/>
-        </div>
-        <button type="submit">Register!</button>
-    </form>
-    {# {{ form_start(form, {'method' : 'POST'}) }}
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
-        {{ form_row(form.fullName) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.plainPassword.first) }}
-        {{ form_row(form.plainPassword.second) }}
-        {{ form_row(form.street) }}
-        {{ form_row(form.city) }}
-        {{ form_row(form.zip) }}
-        <button type="submit">Register!</button>
-        {% form_theme form 'form/fields.html.twig' %}
-    {{ form_end(form) }} #}
+<div class="content">
+    <h1>Sign up</h1>
+    <br/>
+    <div class="register_form">
+        {{ form_start(form, {'method' : 'POST'}) }}
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+            {{ form_row(form.full_name) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword.first) }}
+            {{ form_row(form.plainPassword.second) }}
+            {{ form_row(form.street) }}
+            {{ form_row(form.city) }}
+            {{ form_row(form.zip) }}
+            <button type="submit" class="button">Register!</button>
+        {{ form_end(form) }}
+    </div>
 </div>
-
 {% endblock %}

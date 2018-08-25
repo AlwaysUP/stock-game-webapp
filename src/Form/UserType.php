@@ -22,10 +22,9 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
-            // ->add('paypal', TextType::class)
             ->add('street', TextType::class)
             ->add('city', TextType::class)
-            ->add('zip', TextType::class)
+            ->add('zip')
         ;
     }
 

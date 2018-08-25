@@ -1,17 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
-    .content{
-        margin: 0 auto;
-        padding-top: 20%;
-        width:40%;
-    }
-    .register{
-        padding: 2%;
-    }
-</style>
-<a href="{{ path('logout') }}">LOGOUT</a>
+<a href="{{ path('logout') }}" class="button">LOGOUT</a>
 <div class="content">
     {% if list == false %}
 
@@ -20,20 +10,27 @@
             {{ form_row(form.shortName) }}
             {{ form_row(form.currPrice) }}
             {{ form_row(form.lastPrice) }}
-            <button type="submit">Add</button>
-        {% form_theme form 'form/fields.html.twig' %}
+            <button type="submit" class="button">Add</button>
         {{ form_end(form) }}
 
 
     {% endif %}
 
     {% if list == true %}
+        <h1>List of all stocks<h1>
+        <h3>Please add more if you want</h3>
+        <a href="{{ path('manage') }}" class = "button">HOME</a>&emsp;
+        <a href="{{ path('add_stock') }}" class = "button">ADD A STOCK</a><br/><br/>
         {% for stock in stocks %}
+        <div class="card">
+            <div class="nohover">
             <b>Stock FUll Name:</b> {{stock.fullName}}<br/>
-            <b>Stock SHORT Name:</b> {{stock.shortName}}<br/>
+            <b>Stock SHORT Name:</b> {{stock.shortName|upper}}<br/>
             <b>Stock Current Price:</b> {{stock.currPrice}}<br/>
             <b>Stock Last Price:</b> {{stock.lastPrice}}<br/>
-            ------------------<br/>
+            </div>
+        </div>
+        <br/>
         {% endfor %}
     {% endif %}
 </div>

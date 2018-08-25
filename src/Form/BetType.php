@@ -6,7 +6,7 @@ use App\Entity\Bets;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -23,8 +23,10 @@ class BetType extends AbstractType
             ),            
         ));
         $timestamp = date("Y-m-d h:i:sa");
-        $builder->add('timestamp', HiddenType::class, array(
-            // 'read_only' =>'true',
+        $builder->add('timestamp', TextType::class, array(
+            'attr' => array(
+                'readonly' => true,
+            ),
             'data' => $timestamp,
         ));
     }

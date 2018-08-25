@@ -48,7 +48,7 @@ class StockController extends Controller
     /**
      * @Route("/stock-list", name="list_stock")
      */
-    public function list()
+    public function list(AuthorizationCheckerInterface $authChecker)
     {
         if (false === $authChecker->isGranted('ROLE_USER')){
             return $this->redirectToRoute('login');

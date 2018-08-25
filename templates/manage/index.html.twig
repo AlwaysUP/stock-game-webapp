@@ -3,76 +3,33 @@
 {% block title %}Manage profile{% endblock %}
 
 {% block body %}
-<style>
-    .container{
-        margin: 0 auto;
-        padding-top: 20%;
-        width:400px;
-    }
-</style>
-<a href="{{ path('logout') }}">LOGOUT</a>
-<div class="container">
+<a href="{{ path('logout') }}" class="button">LOGOUT</a>
+<div class="content">
     <h1>Change profile</h1>
     <br/>
-    STILL UNDER CONSTRUCTION!!<br/>
-    you are {{ username }} <br/>
-    your email {{ email }} <br/>
-    you zipcode is {{ zipcode }} <br/>
-    your IP is: {{ ipaddr }} <br/>
+    <b>Hi! Hope you are enjoying our services v(=∩_∩=)ﾌ</b><br/>
+    Name: <b>{{ username }}</b> <br/>
+    Email: <b>{{ email }}</b> <br/>
+    Zipcode: <b>{{ zipcode }}</b> <br/>
+    IP: <b>{{ ipaddr }}</b> <br/><br/>
 
-    <a href="{{ path('add_stock') }}">ADD A STOCK</a><br/>
-    <a href="{{ path('gamble') }}">GAMBLE</a><br/>
-        <form name="update_user" method="post">
+    <a href="{{ path('add_stock') }}" class = "button">ADD A STOCK</a><br/><br/>
+    <a href="{{ path('gamble') }}" class = "button">GAMBLE</a><br/><br/>
+    <a href="{{ path('stat') }}" class = "button">VIEW STATS</a><br/><br/>
+        {{ form_start(form, {'method' : 'POST'}) }}
             <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}"
             >
-            <div>
-                <label for="update_user_fullName" class="required">Full Name</label><br/>
-                <input id="update_user_fullName" name="update_user[fullName]" required="" type="text"><br/><br/>
-            </div>
-            <div>
-                <label for="update_user_email" class="required">Email</label><br/>
-                <input id="update_user_email" name="update_user[email]" required="" type="email"><br/><br/>
-            </div>
-            <div>
-                <label for="update_user_plainPassword_first" class="required">Password</label><br/>
-                <input id="update_user_plainPassword_first" name="update_user[plainPassword][first]" required="" type="password"><br/><br/>
-            </div>
-            <div>
-                <label for="update_user_plainPassword_second" class="required">Repeat Password</label><br/>
-                <input id="update_user_plainPassword_second" name="update_user[plainPassword][second]" required="" type="password"><br/><br/>
-            </div>
-            <div>
-                <label for="update_user_street" class="required">Street Address</label><br/>
-                <input id="update_user_street" name="update_user[street]" required="" type="text"><br/><br/>
-            </div>
-            <div>
-                <label for="update_user_paypal" class="required">Paypal</label><br/>
-                <input id="update_user_paypal" name="update_user[paypal]" required="" type="text"><br/><br/>
-            </div>
-            <div>
-                <label for="update_user_city" class="required">City</label><br/>
-                <input id="update_user_city" name="update_user[city]" required="" type="text"><br/><br/>
-            </div>
-            <div>
-                <label for="update_user_zip" class="required">Zipcode</label><br/>
-                <input id="update_user_zip" name="update_user[zip]" required="" type="text"><br/><br/>
-            </div>
-            <button type="submit">Change</button>
-        </form>
-
-        {# <form name="update_user" method="post">
-            <div><label for="update_user_fullName">Full name</label><textarea id="update_user_fullName" name="update_user[fullName]" maxlength="200"></textarea></div>
-            <div><label for="update_user_email" class="required">Email</label><textarea id="update_user_email" name="update_user[email]" required="required"></textarea></div>
-            <div><label for="update_user_plainPassword_first" class="required">Password</label><input type="password" id="update_user_plainPassword_first" name="update_user[plainPassword][first]" required="required"></div>
-            <div><label for="update_user_plainPassword_second" class="required">Repeat Password</label><input type="password" id="update_user_plainPassword_second" name="update_user[plainPassword][second]" required="required"></div>
-            <div><label for="update_user_street">Street</label><textarea id="update_user_street" name="update_user[street]" maxlength="255"></textarea></div>
-            <div><label for="update_user_city">City</label><textarea id="update_user_city" name="update_user[city]" maxlength="255"></textarea></div>
-            <div><label for="update_user_zip">Zip</label><input type="number" id="update_user_zip" name="update_user[zip]"></div>
-            <div><label for="update_user_paypal">Paypal</label><textarea id="update_user_paypal" name="update_user[paypal]"></textarea></div>
-            <button type="submit">Register!</button>
-        </form> #}
-
+            {{ form_row(form.fullName) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword.first) }}
+            {{ form_row(form.plainPassword.second) }}
+            {{ form_row(form.street) }}
+            {{ form_row(form.city) }}
+            {{ form_row(form.zip) }}
+            {{ form_row(form.paypal) }}
+            <button type="submit" class="button">Change</button>
+        {{ form_end(form) }}
 </div>
 
 

@@ -107,6 +107,7 @@ class GambleController extends Controller
             'stock' => $stock,
             'form' => $form->createView(), 
             'balance' => $balance->getAmount(),
+            'stock' => $stock,
         ]);
     }
 }

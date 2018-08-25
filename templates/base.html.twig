@@ -3,10 +3,60 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}BuzzTrench{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <style>
+                body{
+                    color: black;
+                    {# RGB(65, 65, 65); #}
+                    background: #d6b989;
+                }
+                .content{
+                    margin: 0 auto;
+                    width:50%;
+                    height: 100%;
+                    padding-top: 5%;
+                    padding-bottom: 5%;
+                    text-align:left;                    
+                }
+                .button{
+                    font: bold 13px "Times New Roman";
+                    text-decoration: none;
+                    color: black;
+                    padding: 2px 6px 2px 6px;
+                    border-bottom: 2px solid red;
+                    background-color: lightgrey;
+                }
+                .button:hover{
+                    text-decoration: none;
+                    color: white;
+                    background-color: grey;
+                }
+                .card{
+                    color: white;
+                    background: black;
+                    padding-left: 5%;
+                    padding-top: 2%;
+                    padding-bottom: 2%;
+                }
+                .nohover{
+                    text-decoration: none;
+                    color: RGB(180,180,180);
+                }
+                .nohover:hover{
+                    text-decoration: none;
+                    color: RGB(60,80,80);
+                }
+            </style>
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+        {% endblock %}
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        {% endblock %}
     </body>
 </html>
